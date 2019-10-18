@@ -4,10 +4,7 @@
 #include <stdio.h>
 #include <QCoreApplication>
 #include <QDebug>
-
-struct coor{
-    int x,y;
-};
+#include "dynamique.h"
 
 class Piece
 {
@@ -17,7 +14,7 @@ public:
     int tab[8][9][2];
     coor co;
     QLabel image;
-
+    Dynamique* deplacement(coor* pos_a,coor* pos_e);
     Piece();
 
     void move(int x,int y);

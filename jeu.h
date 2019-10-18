@@ -19,10 +19,13 @@ class Jeu : public QWidget
 
     public:
     Jeu();
+    void afficher(const Dynamique *ptr );
     void setstyle();
     void mousePressEvent(QMouseEvent *event);
     void setequipe(Equipe * equipe);
     void changement_equipe();
+    void findujeu(int color);
+    //Dynamique * deplacement(int color,std::string nom,coor* pos_a,coor* pos_e);
     signals:
 
     public slots:
@@ -30,13 +33,14 @@ class Jeu : public QWidget
     void commencer();
 
     private:
+    Dynamique *depl;
     QTime decompte;
     QTimer *timer;
     int ptblanc,ptnoir,limite_temps,re_temps;
     char score[3];
     Equipe *select,*autre,*noir,*blanc;
     Plateau *pt;
-    QLabel *titre,*points,*Tnoir,*Tblanc,*Pnoir,*Pblanc,*temps_noir,*temps_blanc;
+    QLabel *titre,*points,*Tnoir,*Tblanc,*Pnoir,*Pblanc,*temps_noir,*temps_blanc,*vert;
     QLabel *image;
     QPixmap *img;
     QPushButton *b_commencer;

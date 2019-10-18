@@ -4,10 +4,10 @@
 
 class Pion : public Piece{
 public:
-    coor *dep = NULL;
+    Dynamique *dep = nullptr;
     Pion();
     void del(); // supp les tableaux sur le tas en trop.
-    coor* deplacement();
+    //Dynamique* deplacement(const coor &pos_a[],const coor &pos_e[]);
     void set(int x, int y, QPixmap pix, std::string nom);
 };
 

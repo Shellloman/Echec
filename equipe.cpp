@@ -16,18 +16,16 @@ Equipe::Equipe(int couleur)
 
         std::string nomroi ="roi noir";
         std::string nomdame ="dame noir";
-        std::string noir = "pion noir ";
-        std::string nomfou1 = "fou noir 1";
-        std::string nomfou2 = "fou noir 2";
-        std::string nomcavalier1 = "cavalier noir 1";
-        std::string nomcavalier2 = "cavalier noir 2";
-        std::string nomtour1 = "tour noir 1";
-        std::string nomtour2 = "tour noir 2";
+        std::string noir = "pion noir";
+        std::string nomfou1 = "fou noir";
+        std::string nomfou2 = "fou noir";
+        std::string nomcavalier1 = "cavalier noir";
+        std::string nomcavalier2 = "cavalier noir";
+        std::string nomtour1 = "tour noir";
+        std::string nomtour2 = "tour noir";
 
         for (int i =0;i<8;i++){
-            std::sprintf(nb,"%d",i+1);
-            name = noir +nb;
-            pion[i].set(7,i+1,pion_img,name);
+            pion[i].set(7,i+1,pion_img,noir);
         }
         roi.set(8,5,roi_img,nomroi);
         dame.set(8,4,dame_img,nomdame);
@@ -48,18 +46,16 @@ Equipe::Equipe(int couleur)
 
         std::string nomroi ="roi blanc";
         std::string nomdame ="dame blanc";
-        std::string blanc = "pion blanc ";
-        std::string nomfou1 = "fou blanc 1";
-        std::string nomfou2 = "fou blanc 2";
-        std::string nomcavalier1 = "cavalier noir 1";
-        std::string nomcavalier2 = "cavalier noir 2";
-        std::string nomtour1 = "tour noir 1";
-        std::string nomtour2 = "tour noir 2";
+        std::string blanc = "pion blanc";
+        std::string nomfou1 = "fou blanc";
+        std::string nomfou2 = "fou blanc";
+        std::string nomcavalier1 = "cavalier noir";
+        std::string nomcavalier2 = "cavalier noir";
+        std::string nomtour1 = "tour noir";
+        std::string nomtour2 = "tour noir";
 
         for (int i =0;i<8;i++){
-            std::sprintf(nb,"%d",i+1);
-            name = blanc+nb;
-            pion[i].set(2,i+1,pion_img,name);
+            pion[i].set(2,i+1,pion_img,blanc);
         }
 
         roi.set(1,5,roi_img,nomroi);
@@ -113,4 +109,16 @@ bool Equipe::is_here(int x, int y){
 
 void Equipe::setTime(int minutes){
     temps = new QTime(0,minutes,0);
+}
+
+coor* Equipe::position(){
+    coor *temp = new coor[16];
+    for(int i=0;i<8;i++){
+        temp[i]=pion[i].co;
+    }
+    temp[8] = tour[0].co;temp[9]=tour[1].co;
+    temp[10] = cavalier[0].co;temp[11]=cavalier[1].co;
+    temp[12] = fou[0].co;temp[13]=fou[1].co;
+    temp[14] = dame.co;temp[15]=roi.co;
+    return temp;
 }

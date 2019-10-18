@@ -24,6 +24,7 @@ public:
     QTime *temps;
     Equipe(int couleur);
 
+    coor* position();
     void select(Piece *sel);
     bool is_here(int x,int y);
     void setTime(int minutes);

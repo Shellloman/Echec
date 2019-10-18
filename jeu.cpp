@@ -36,6 +36,8 @@ Jeu::Jeu() : QWidget()
     re_temps = 10;
     clock = false;
     debut_partie = false;
+    depl =  NULL;
+    vert = NULL;
 
     //construction plateau
     pt = new Plateau;
@@ -95,11 +97,29 @@ void Jeu::mousePressEvent(QMouseEvent * event){
         for(int j=0;j<8;j++){
             if (((pt->cases[i][j][0]<= x) && (x <=pt->cases[i][j][0]+76))&&((pt->cases[i][j][1]<= y) && (y <=pt->cases[i][j][1]+75))){
                 if (select->is_here(i+1,j+1)){
-                qDebug()<<QString::fromStdString(select->selected->nom) <<" est séléctionné\n";
-                }else if (select->selected!=NULL){
+                    if(vert != NULL){
+                    delete [] vert;
+                    vert = NULL;
+                    }
+                    depl = select->selected->deplacement(select->position(),autre->position());
+                    afficher(depl);
+                    qDebug()<<QString::fromStdString(select->selected->nom) <<" est séléctionné\n";
+                }else if (select->selected!=NULL && depl !=NULL){
+                    bool test=true;
+                    for (int k=0;k<depl->Taille();k++){
+                        if (i+1 == depl->co(k).x && j+1 == depl->co(k).y){
+                            test = false;
+                            break;
+                        }
+                    }
+                    delete depl;
+                    depl = nullptr;
+                    if (test){break;}
                     select->selected->move(i+1,j+1);
                     qDebug() <<"piece bougée\n";
                     select->selected = NULL;
+                    delete [] vert;
+                    vert = NULL;
                     if (autre->is_here(i+1,j+1)){
                         if (autre->color == 1){
                         ptblanc += autre->selected->dead();
@@ -116,29 +136,7 @@ void Jeu::mousePressEvent(QMouseEvent * event){
                         std::sprintf(score,"%d",ptblanc-ptnoir);
                         Pnoir->setText(score);
                         }
-                        if (ptnoir >= 99){
-                        qDebug() <<"test 1";
-                        Pblanc->setText(QString ("c'est pas vraiment"));
-                        Pnoir->setText(QString ("finie mdr xD"));
-                        qDebug() <<"test 2";
-                        Pblanc->setGeometry(300,650,500,100);
-                        Pnoir->setGeometry(300,175,500,100);
-                        qDebug() <<"test 3";
-                        Pblanc->setStyleSheet("font-size : 50px;text-decoration:underline;");
-                        Pnoir->setStyleSheet("font-size : 50px;text-decoration:underline;");
-                        qDebug() <<"test 4";
-                        // image->hide();
-                        qDebug() <<"test 5";
-                        }
-                        if(ptblanc >= 99){
-                        Pblanc->setText(QString ("c'est pas vraiment"));
-                        Pnoir->setText(QString ("finie mdr xD"));
-                        Pblanc->setGeometry(300,650,500,100);
-                        Pnoir->setGeometry(300,175,500,100);
-                        Pblanc->setStyleSheet("font-size : 50px;text-decoration:underline;");
-                        Pnoir->setStyleSheet("font-size : 50px;text-decoration:underline;");
-                        // image->hide();
-                        }
+                        if (ptnoir >= 99 || ptblanc >= 99) {findujeu(select->color);}
                     }
                     qDebug()<<"ok3";
                     *(select->temps) = select->temps->addMSecs(re_temps*1000);
@@ -216,4 +214,38 @@ void Jeu::commencer(){
     clock = true;
     debut_partie = true;
 
+}
+void Jeu::findujeu(int color){
+    if (color == 0){
+        Pblanc->setText(QString ("noir gagne"));
+        Pnoir->setText(QString ("finie mdr xD"));
+        Pblanc->setGeometry(300,650,500,100);
+        Pnoir->setGeometry(300,175,500,100);
+        Pblanc->setStyleSheet("font-size : 50px;text-decoration:underline;");
+        Pnoir->setStyleSheet("font-size : 50px;text-decoration:underline;");
+    }else{
+        Pblanc->setText(QString ("blanc gagne"));
+        Pnoir->setText(QString ("finie mdr xD"));
+        Pblanc->setGeometry(300,650,500,100);
+        Pnoir->setGeometry(300,175,500,100);
+        Pblanc->setStyleSheet("font-size : 50px;text-decoration:underline;");
+        Pnoir->setStyleSheet("font-size : 50px;text-decoration:underline;");
+    }
+}
+void Jeu::afficher(const Dynamique *dep){
+    for (int i=0;i<dep->Taille();i++){
+        qDebug()<<dep->co(i).x <<" "<<dep->co(i).y;
+    }
+    QPixmap verts = QCoreApplication::applicationDirPath()+"/image/vert.png";
+    vert = new QLabel[dep->Taille()];
+    int x,y;
+    for(int i=0;i<dep->Taille();i++){
+        x = dep->co(i).x;
+        y = dep->co(i).y;
+        vert[i].setParent(this);
+        vert[i].setPixmap(verts);
+        vert[i].setFixedSize(15,15);
+        vert[i].move(pt->cases[x-1][y-1][0],pt->cases[x-1][y-1][1]);
+        vert[i].show();
+    }
 }

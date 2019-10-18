@@ -12,7 +12,8 @@ SOURCES += \
     Pieces/dame.cpp \
     Pieces/fou.cpp \
     Pieces/cavalier.cpp \
-    Pieces/tour.cpp
+    Pieces/tour.cpp \
+    Pieces/dynamique.cpp
 
 HEADERS += \
     MaFenetre.h \
@@ -25,7 +26,8 @@ HEADERS += \
     Pieces/dame.h \
     Pieces/fou.h \
     Pieces/cavalier.h \
-    Pieces/tour.h
+    Pieces/tour.h \
+    Pieces/dynamique.h
 
 STATECHARTS +=
 
