@@ -5,7 +5,6 @@ Equipe::Equipe(int couleur)
     selected = NULL;
     color = couleur;
     std::string name;
-    char nb[2];
     if (couleur==0){
         QPixmap pion_img = QCoreApplication::applicationDirPath()+"/image/pieces/pion_noir.png";
         QPixmap roi_img = QCoreApplication::applicationDirPath()+"/image/pieces/roi_noir.png";
