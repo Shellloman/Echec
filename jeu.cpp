@@ -242,10 +242,12 @@ void Jeu::afficher(const Dynamique *dep){
     for(int i=0;i<dep->Taille();i++){
         x = dep->co(i).x;
         y = dep->co(i).y;
-        vert[i].setParent(this);
-        vert[i].setPixmap(verts);
-        vert[i].setFixedSize(15,15);
-        vert[i].move(pt->cases[x-1][y-1][0],pt->cases[x-1][y-1][1]);
-        vert[i].show();
+        if (x >= 1 && x <= 8 && y <=8 && y >=1){
+            vert[i].setParent(this);
+            vert[i].setPixmap(verts);
+            vert[i].setFixedSize(15,15);
+            vert[i].move(pt->cases[x-1][y-1][0],pt->cases[x-1][y-1][1]);
+            vert[i].show();
+        }
     }
 }
