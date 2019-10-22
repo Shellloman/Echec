@@ -245,8 +245,9 @@ void Jeu::afficher(const Dynamique *dep){
         if (x >= 1 && x <= 8 && y <=8 && y >=1){
             vert[i].setParent(this);
             vert[i].setPixmap(verts);
-            vert[i].setFixedSize(15,15);
-            vert[i].move(pt->cases[x-1][y-1][0],pt->cases[x-1][y-1][1]);
+            vert[i].setFixedSize(76,75);
+            vert[i].move(pt->cases[x-1][y-1][0]-1,pt->cases[x-1][y-1][1]-2);
+            vert[i].setStyleSheet("background-color:transparent;");
             vert[i].show();
         }
     }
