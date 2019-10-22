@@ -330,6 +330,73 @@ Dynamique* Piece::deplacement(coor*pos_a, coor*pos_e){
         }
         if (test_a){dep->add({co.x-1,co.y-2});}
     }
+    if (nom == "roi noir" || nom =="roi blanc"){
+        bool test_a =true;
+        for (int i=0;i<16;i++){
+            if (co.x+1 == pos_a[i].x && co.y == pos_a[i].y){
+                test_a = false;
+                break;
+            }
+        }
+        if (test_a){dep->add({co.x+1,co.y});}
+        test_a = true;
+        for (int i=0;i<16;i++){
+            if (co.x+1 == pos_a[i].x && co.y+1 == pos_a[i].y){
+                test_a = false;
+                break;
+            }
+        }
+        if (test_a){dep->add({co.x+1,co.y+1});}
+        test_a = true;
+        for (int i=0;i<16;i++){
+            if (co.x == pos_a[i].x && co.y+1 == pos_a[i].y){
+                test_a = false;
+                break;
+            }
+        }
+        if (test_a){dep->add({co.x,co.y+1});}
+        test_a = true;
+        for (int i=0;i<16;i++){
+            if (co.x-1 == pos_a[i].x && co.y+1 == pos_a[i].y){
+                test_a = false;
+                break;
+            }
+        }
+        if (test_a){dep->add({co.x-1,co.y+1});}
+        test_a = true;
+        for (int i=0;i<16;i++){
+            if (co.x-1 == pos_a[i].x && co.y == pos_a[i].y){
+                test_a = false;
+                break;
+            }
+        }
+        if (test_a){dep->add({co.x-1,co.y});}
+        test_a = true;
+        for (int i=0;i<16;i++){
+            if (co.x-1 == pos_a[i].x && co.y-1 == pos_a[i].y){
+                test_a = false;
+                break;
+            }
+        }
+        if (test_a){dep->add({co.x-1,co.y-1});}
+        test_a = true;
+        for (int i=0;i<16;i++){
+            if (co.x == pos_a[i].x && co.y-1 == pos_a[i].y){
+                test_a = false;
+                break;
+            }
+        }
+        if (test_a){dep->add({co.x,co.y-1});}
+        test_a = true;
+        for (int i=0;i<16;i++){
+            if (co.x+1 == pos_a[i].x && co.y-1 == pos_a[i].y){
+                test_a = false;
+                break;
+            }
+        }
+        if (test_a){dep->add({co.x+1,co.y-1});}
+        test_a = true;
+    }
     delete []pos_a;
     delete []pos_e;
     return dep;
