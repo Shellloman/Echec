@@ -2,6 +2,7 @@
 
 Equipe::Equipe(int couleur)
 {
+    nb_dead = 0;
     proque= true;
     groque =true;
     selected = NULL;

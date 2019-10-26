@@ -61,8 +61,8 @@ Jeu::Jeu() : QWidget()
     Tblanc = new QLabel(QString("blanc :"),this);
 
     titre = new QLabel(QString("nouvelle partie"),this);
-    temps_noir->setGeometry(1100,175,100,50);
-    temps_blanc->setGeometry(1100,650,100,50);
+    temps_noir->setGeometry(1100,150,100,50);
+    temps_blanc->setGeometry(1100,675,100,50);
     temps_blanc->hide();
     temps_noir->hide();
     titre->setGeometry(430,30,200,30);
@@ -146,14 +146,16 @@ void Jeu::mousePressEvent(QMouseEvent * event){
                     vert = NULL;
                     if (autre->is_here(i+1,j+1)){
                         if (autre->color == 1){
-                        ptblanc += autre->selected->dead();
+                        ptblanc += autre->selected->dead(autre->color,autre->nb_dead);
+                        autre->nb_dead++;
                         autre->selected = NULL;
                         std::sprintf(score,"%d",ptblanc-ptnoir);
                         Pnoir->setText(score);
                         std::sprintf(score,"%d",ptnoir-ptblanc);
                         Pblanc->setText(score);
                         }else{
-                        ptnoir += autre->selected->dead();
+                        ptnoir += autre->selected->dead(autre->color,autre->nb_dead);
+                        autre->nb_dead++;
                         autre->selected = NULL;
                         std::sprintf(score,"%d",ptnoir-ptblanc);
                         Pblanc->setText(score);
@@ -223,12 +225,13 @@ void Jeu::setequipe(Equipe * equipe){
 void Jeu::commencer(){
     qDebug() <<"commencer ok";
     b_commencer->hide();
-
+    QTime tempo (0,aff_limite_temps->intValue(),0);
     slider_limite_temps->hide();
     slider_re_temps->hide();
     aff_limite_temps->hide();
     aff_re_temps->hide();
-
+    temps_noir->setText(tempo.toString());
+    temps_blanc->setText(tempo.toString());
     temps_blanc->show();
     temps_noir->show();
     noir->setTime(aff_limite_temps->intValue());

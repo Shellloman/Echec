@@ -8,10 +8,16 @@ Piece::Piece(int r)
             tab[i][j][0] = 244+76*j; //longueur x
             tab[i][j][1] = 744-75*(i+1); //largeur y
         }
-        tab[7][8][0]= 0;
-        tab[7][8][0]= 0;
-
     }
+    for (int i = 0;i<3;i++){
+        for(int j = 0;j<6;j++){
+            cemetery_b[i][j].x = 950+50*j;
+            cemetery_b[i][j].y = 540+75*i;
+            cemetery_n[i][j].x = 950+50*j;
+            cemetery_n[i][j].y = 225+75*i;
+        }
+    }
+
 }
 
 void Piece::move(int x, int y){
@@ -29,9 +35,14 @@ void Piece::setimage(QPixmap pix){
     image.setStyleSheet("background-color:transparent;");
 }
 
-int Piece::dead(){
-    image.hide();
-    move(8,9);
+int Piece::dead(int color,int nb_dead){
+    //move(8,9);
+    co.x = 8;co.y=9;
+    if (color ==0){
+        image.move(cemetery_n[nb_dead/6][nb_dead%6].x,cemetery_n[nb_dead/6][nb_dead%6].y);
+    }else{
+        image.move(cemetery_b[nb_dead/6][nb_dead%6].x,cemetery_b[nb_dead/6][nb_dead%6].y);
+    }
     return valeur;
 }
 Dynamique* Piece::deplacement(coor*pos_a, coor*pos_e,bool proque,bool groque){
@@ -59,12 +70,12 @@ Dynamique* Piece::deplacement(coor*pos_a, coor*pos_e,bool proque,bool groque){
             dep->add({co.x+j,co.y});
             }
             for (int i=0;i<16;i++){
-            if(co.x+1 == pos_e[i].x && co.y+1 == pos_a[i].y){
+            if(co.x+1 == pos_e[i].x && co.y+1 == pos_e[i].y){
                 dep->add({co.x+1,co.y+1});
                 break;
             }}
             for (int i=0;i<16;i++){
-            if (co.x+1 == pos_e[i].x && co.y-1 == pos_a[i].y){
+            if (co.x+1 == pos_e[i].x && co.y-1 == pos_e[i].y){
                 dep->add({co.x+1,co.y-1});
                 break;
             }}
