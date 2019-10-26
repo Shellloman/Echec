@@ -1,7 +1,8 @@
 #include "piece.h"
 
-Piece::Piece()
+Piece::Piece(int r)
 {
+    roque = r;
     for(int i = 0;i<8;i++){
         for(int j=0;j<8;j++){
             tab[i][j][0] = 244+76*j; //longueur x
@@ -33,7 +34,7 @@ int Piece::dead(){
     move(8,9);
     return valeur;
 }
-Dynamique* Piece::deplacement(coor*pos_a, coor*pos_e){
+Dynamique* Piece::deplacement(coor*pos_a, coor*pos_e,bool proque,bool groque){
     Dynamique *dep = new Dynamique;
     if(nom=="pion blanc"){
         bool test_a = true,test_e=true;
@@ -332,6 +333,26 @@ Dynamique* Piece::deplacement(coor*pos_a, coor*pos_e){
     }
     if (nom == "roi noir" || nom =="roi blanc"){
         bool test_a =true;
+        if (proque){
+            for (int i=0;i<16;i++){
+                if ((co.x == pos_a[i].x && (co.y+1 == pos_a[i].y || co.y+2 == pos_a[i].y))||(co.x == pos_e[i].x && (co.y+1 == pos_e[i].y || co.y+2 == pos_e[i].y)) ){
+                    test_a = false;
+                    break;
+                }
+            }
+            if (test_a){dep->add({co.x,co.y+2});}
+        }
+        test_a =true;
+        if (groque){
+            for (int i=0;i<16;i++){
+                if ((co.x == pos_a[i].x && (co.y-1 == pos_a[i].y || co.y-2 == pos_a[i].y || co.y-3 ==pos_a[i].y))||(co.x == pos_e[i].x && (co.y-1 == pos_e[i].y || co.y-2 == pos_e[i].y || co.y-3 ==pos_e[i].y)) ){
+                    test_a = false;
+                    break;
+                }
+            }
+            if (test_a){dep->add({co.x,co.y-2});}
+        }
+        test_a =true;
         for (int i=0;i<16;i++){
             if (co.x+1 == pos_a[i].x && co.y == pos_a[i].y){
                 test_a = false;

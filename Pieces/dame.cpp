@@ -1,6 +1,6 @@
 #include "dame.h"
 
-Dame::Dame(): Piece()
+Dame::Dame(): Piece(0)
 {
     valeur = 9;
 }
@@ -17,4 +17,3 @@ void Dame::del(){
 coor* Dame::deplacement(){
     return NULL;
 }
-

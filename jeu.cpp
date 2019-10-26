@@ -101,7 +101,7 @@ void Jeu::mousePressEvent(QMouseEvent * event){
                     delete [] vert;
                     vert = NULL;
                     }
-                    depl = select->selected->deplacement(select->position(),autre->position());
+                    depl = select->selected->deplacement(select->position(),autre->position(),select->proque,select->groque);
                     afficher(depl);
                     qDebug()<<QString::fromStdString(select->selected->nom) <<" est séléctionné\n";
                 }else if (select->selected!=NULL && depl !=NULL){
@@ -116,6 +116,30 @@ void Jeu::mousePressEvent(QMouseEvent * event){
                     depl = nullptr;
                     if (test){break;}
                     select->selected->move(i+1,j+1);
+                    if (select->proque || select->groque){
+                        if (select->selected->roque == 1){
+                            if ((i+1 == 1) && j+1==3){
+                                select->tour[0].move(1,4);
+                            }
+                            if ((i+1 == 1) && j+1==7){
+                                select->tour[1].move(1,6);
+                            }
+                            if ((i+1 == 8) && j+1==3){
+                                select->tour[0].move(8,4);
+                            }
+                            if ((i+1 == 8) && j+1==7){
+                                select->tour[1].move(8,6);
+                            }
+                            select->proque = false;
+                            select->groque = false;
+                        }
+                        if (select->selected->roque==2){
+                            select->proque = false;
+                        }
+                        if (select->selected->roque==3){
+                            select->groque = false;
+                        }
+                    }
                     qDebug() <<"piece bougée\n";
                     select->selected = NULL;
                     delete [] vert;

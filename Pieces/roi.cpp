@@ -1,6 +1,6 @@
 #include "roi.h"
 
-Roi::Roi(): Piece()
+Roi::Roi(): Piece(1)
 {
     valeur = 99;
 }

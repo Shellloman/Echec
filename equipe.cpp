@@ -2,6 +2,8 @@
 
 Equipe::Equipe(int couleur)
 {
+    proque= true;
+    groque =true;
     selected = NULL;
     color = couleur;
     std::string name;
@@ -32,8 +34,8 @@ Equipe::Equipe(int couleur)
         fou[1].set(8,6,fou_img,nomfou2);
         cavalier[0].set(8,2,cavalier_img,nomcavalier1);
         cavalier[1].set(8,7,cavalier_img,nomcavalier2);
-        tour[0].set(8,1,tour_img,nomtour1);
-        tour[1].set(8,8,tour_img,nomtour2);
+        tour[0].set(8,1,3,tour_img,nomtour1);
+        tour[1].set(8,8,2,tour_img,nomtour2);
 
     }else{
         QPixmap pion_img = QCoreApplication::applicationDirPath()+"/image/pieces/pion_blanc.png";
@@ -63,8 +65,8 @@ Equipe::Equipe(int couleur)
         fou[1].set(1,6,fou_img,nomfou2);
         cavalier[0].set(1,2,cavalier_img,nomcavalier1);
         cavalier[1].set(1,7,cavalier_img,nomcavalier2);
-        tour[0].set(1,1,tour_img,nomtour1);
-        tour[1].set(1,8,tour_img,nomtour2);
+        tour[0].set(1,1,3,tour_img,nomtour1);
+        tour[1].set(1,8,2,tour_img,nomtour2);
     }
 }
 

@@ -1,15 +1,16 @@
 #include "tour.h"
 
-Tour::Tour(): Piece()
+Tour::Tour(): Piece(0)
 {
     valeur = 5;
 }
 
-void Tour::set(int x, int y, QPixmap pix,std::string name){
+void Tour::set(int x, int y,int r, QPixmap pix,std::string name){
     setimage(pix);
     move(x,y);
     this->nom = name;
-    // qDebug()<<"ça marche jusque là";
+    roque =r ;
+
 }
 void Tour::del(){
     delete [] dep;

@@ -1,6 +1,6 @@
 #include "cavalier.h"
 
-Cavalier::Cavalier(): Piece()
+Cavalier::Cavalier(): Piece(0)
 {
     valeur = 3;
 }

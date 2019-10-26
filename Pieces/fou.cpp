@@ -1,6 +1,6 @@
 #include "fou.h"
 
-Fou::Fou(): Piece()
+Fou::Fou(): Piece(0)
 {
     valeur = 3;
 }

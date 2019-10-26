@@ -12,6 +12,7 @@
 class Equipe
 {
 public:
+    bool proque,groque;
     int color;
     Piece *selected;
     Pion pion[8];
