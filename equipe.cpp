@@ -149,25 +149,26 @@ bool Equipe::is_ptr_NotNull(){
 Dynamique* Equipe::deplacement(coor* enemie){
     for (int i =0;i<8;i++){
         if (pion[i].selected){
-            return (pion[i].deplacement(position(),enemie,proque,groque));
+            return (pion[i].deplacement(position(),enemie,proque,groque,color));
         }
     }
     if(cavalier[0].selected){
-        return cavalier[0].deplacement(position(),enemie,proque,groque);}
+        return cavalier[0].deplacement(position(),enemie);}
     if(cavalier[1].selected){
-        return cavalier[1].deplacement(position(),enemie,proque,groque);}
+        return cavalier[1].deplacement(position(),enemie);}
     if(fou[0].selected){
-        return fou[0].deplacement(position(),enemie,proque,groque);}
+        return fou[0].deplacement(position(),enemie);}
     if(fou[1].selected){
-        return fou[1].deplacement(position(),enemie,proque,groque);}
+        return fou[1].deplacement(position(),enemie);}
     if(tour[0].selected){
-        return tour[0].deplacement(position(),enemie,proque,groque);}
+        return tour[0].deplacement(position(),enemie);}
     if(tour[1].selected){
-        return tour[1].deplacement(position(),enemie,proque,groque);}
+        return tour[1].deplacement(position(),enemie);}
     if(dame.selected){
-        return dame.deplacement(position(),enemie,proque,groque);}
+        return dame.deplacement(position(),enemie);}
     if(roi.selected){
         return roi.deplacement(position(),enemie,proque,groque);}
+    return NULL;
 
 }
 void Equipe::move(int x,int y){
@@ -249,5 +250,7 @@ int Equipe::dead(int color,int nb_dead){
     if(roi.selected){
         roi.dead(color,nb_dead);
         return 1000;}
+
+    return 0;
 
 }

@@ -5,7 +5,7 @@
 class Cavalier: public Piece{
 public:
     coor *dep = NULL;
-    // coor* deplacement();
+    Dynamique* deplacement(coor* pos_a,coor* pos_e);
     Cavalier();
     void set(int x, int y, QPixmap pix, std::string nom);
     void del(); // supp les tableaux sur le tas en trop.
