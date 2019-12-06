@@ -15,7 +15,7 @@ void Pion::set(int x, int y, QPixmap pix,std::string name){
     this->nom = name;
 }
 
-Dynamique* Pion::deplacement(coor* pos_a,coor* pos_e,bool proque,bool groque,int color){
+Dynamique* Pion::deplacement(coor* pos_a,coor* pos_e,int color){
     Dynamique *dep = new Dynamique;
     if(color==1){
         bool test_a = true,test_e=true;

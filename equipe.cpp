@@ -149,7 +149,7 @@ bool Equipe::is_ptr_NotNull(){
 Dynamique* Equipe::deplacement(coor* enemie){
     for (int i =0;i<8;i++){
         if (pion[i].selected){
-            return (pion[i].deplacement(position(),enemie,proque,groque,color));
+            return (pion[i].deplacement(position(),enemie,color));
         }
     }
     if(cavalier[0].selected){

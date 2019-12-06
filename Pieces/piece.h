@@ -15,7 +15,6 @@ public:
     coor co,cemetery_n[3][6],cemetery_b[3][6];
     QLabel image;
     bool selected;
-    Dynamique* deplacement(coor* pos_a,coor* pos_e,bool proque,bool groque);
     Piece(int r);
 
     void move(int x,int y);
