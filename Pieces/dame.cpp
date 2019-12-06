@@ -14,6 +14,6 @@ void Dame::set(int x, int y, QPixmap pix,std::string name){
 void Dame::del(){
     delete [] dep;
 }
-coor* Dame::deplacement(){
-    return NULL;
-}
+// coor* Dame::deplacement(){
+//     return NULL;
+// }

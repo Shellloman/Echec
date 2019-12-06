@@ -14,6 +14,6 @@ void Roi::set(int x, int y, QPixmap pix,std::string name){
 void Roi::del(){
     delete [] dep;
 };
-coor* Roi::deplacement(){
-    return NULL;
-};
+// coor* Roi::deplacement(){
+//     return NULL;
+// };

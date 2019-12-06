@@ -26,8 +26,13 @@ public:
     Equipe(int couleur);
 
     coor* position();
-    void select(Piece *sel);
+    void reset_ptr();
     bool is_here(int x,int y);
     void setTime(int minutes);
+    Dynamique* deplacement(coor* enemie);
+    bool is_ptr_NotNull();
+    void move(int x,int y);
+    bool roque(int r);
+    int dead(int color,int nb_dead);
 };
 #endif // EQUIPE_H

@@ -71,40 +71,45 @@ Equipe::Equipe(int couleur)
     }
 }
 
-void Equipe::select(Piece *sel){
-    selected = sel;
-}
-
 bool Equipe::is_here(int x, int y){
     for (int i =0;i<8;i++){
         if (pion[i].is_here(x,y)){
-            select(&(pion[i]));
+            reset_ptr();
+            pion[i].selected = true;
             return true;
         }
     }
     if(cavalier[0].is_here(x,y)){
-        select(&(cavalier[0]));
+        reset_ptr();
+        cavalier[0].selected = true;
         return true;}
     if(cavalier[1].is_here(x,y)){
-        select(&(cavalier[1]));
+        reset_ptr();
+        cavalier[1].selected = true;
         return true;}
     if(fou[0].is_here(x,y)){
-        select(&(fou[0]));
+        reset_ptr();
+        fou[0].selected = true;
         return true;}
     if(fou[1].is_here(x,y)){
-        select(&(fou[1]));
+        reset_ptr();
+        fou[1].selected = true;
         return true;}
     if(tour[0].is_here(x,y)){
-        select(&(tour[0]));
+        reset_ptr();
+        tour[0].selected = true;
         return true;}
     if(tour[1].is_here(x,y)){
-        select(&(tour[1]));
+        reset_ptr();
+        tour[1].selected = true;
         return true;}
     if(dame.is_here(x,y)){
-        select(&(dame));
+        reset_ptr();
+        dame.selected = true;
         return true;}
     if (roi.is_here(x,y)){
-       select(&(roi));
+        reset_ptr();
+       roi.selected = true;
        return true;}
     return false;
 }
@@ -123,4 +128,126 @@ coor* Equipe::position(){
     temp[12] = fou[0].co;temp[13]=fou[1].co;
     temp[14] = dame.co;temp[15]=roi.co;
     return temp;
+}
+void Equipe::reset_ptr(){
+    for (int i =0;i<8;i++){
+        pion[i].selected = false;
+    }
+    cavalier[0].selected = false;
+    cavalier[1].selected = false;
+    fou[0].selected = false;
+    fou[1].selected = false;
+    tour[0].selected = false;
+    tour[1].selected = false;
+    dame.selected = false;
+    roi.selected = false;
+}
+bool Equipe::is_ptr_NotNull(){
+    return(cavalier[0].selected || pion[0].selected||cavalier[1].selected || pion[1].selected||fou[0].selected || pion[2].selected||fou[1].selected || pion[3].selected||tour[0].selected || pion[4].selected||tour[1].selected || pion[5].selected||dame.selected || pion[6].selected||roi.selected ||  pion[7].selected );
+}
+
+Dynamique* Equipe::deplacement(coor* enemie){
+    for (int i =0;i<8;i++){
+        if (pion[i].selected){
+            return (pion[i].deplacement(position(),enemie,proque,groque));
+        }
+    }
+    if(cavalier[0].selected){
+        return cavalier[0].deplacement(position(),enemie,proque,groque);}
+    if(cavalier[1].selected){
+        return cavalier[1].deplacement(position(),enemie,proque,groque);}
+    if(fou[0].selected){
+        return fou[0].deplacement(position(),enemie,proque,groque);}
+    if(fou[1].selected){
+        return fou[1].deplacement(position(),enemie,proque,groque);}
+    if(tour[0].selected){
+        return tour[0].deplacement(position(),enemie,proque,groque);}
+    if(tour[1].selected){
+        return tour[1].deplacement(position(),enemie,proque,groque);}
+    if(dame.selected){
+        return dame.deplacement(position(),enemie,proque,groque);}
+    if(roi.selected){
+        return roi.deplacement(position(),enemie,proque,groque);}
+
+}
+void Equipe::move(int x,int y){
+    for (int i =0;i<8;i++){
+        if (pion[i].selected){
+            pion[i].move(x,y);
+        }
+    }
+    if(cavalier[0].selected){
+        cavalier[0].move(x,y);}
+    if(cavalier[1].selected){
+        cavalier[1].move(x,y);}
+    if(fou[0].selected){
+        fou[0].move(x,y);}
+    if(fou[1].selected){
+        fou[1].move(x,y);}
+    if(tour[0].selected){
+        tour[0].move(x,y);}
+    if(tour[1].selected){
+        tour[1].move(x,y);}
+    if(dame.selected){
+        dame.move(x,y);}
+    if(roi.selected){
+        roi.move(x,y);}
+}
+bool Equipe::roque(int r){
+    for (int i =0;i<8;i++){
+        if (pion[i].selected){
+            return pion[i].roque ==r;
+        }
+    }
+    if(cavalier[0].selected){
+        return cavalier[0].roque ==r;}
+    if(cavalier[1].selected){
+        return cavalier[1].roque ==r;}
+    if(fou[0].selected){
+        return fou[0].roque ==r;}
+    if(fou[1].selected){
+        return fou[1].roque ==r;}
+    if(tour[0].selected){
+        return tour[0].roque ==r;}
+    if(tour[1].selected){
+        return tour[1].roque ==r;}
+    if(dame.selected){
+        return dame.roque ==r;}
+    if(roi.selected){
+        return roi.roque ==r;}
+    return false;
+
+}
+int Equipe::dead(int color,int nb_dead){
+    for (int i =0;i<8;i++){
+        if (pion[i].selected){
+            pion[i].dead(color,nb_dead);
+            return 1;
+        }
+    }
+    if(cavalier[0].selected){
+        cavalier[0].dead(color,nb_dead);
+        return 3;}
+    if(cavalier[1].selected){
+        cavalier[1].dead(color,nb_dead);
+        return 3;}
+    if(fou[0].selected){
+        fou[0].dead(color,nb_dead);
+        return 3;}
+    if(fou[1].selected){
+        fou[1].dead(color,nb_dead);
+        return 3;}
+    if(tour[0].selected){
+        tour[0].dead(color,nb_dead);
+        return 5;}
+    if(tour[1].selected){
+        tour[1].dead(color,nb_dead);
+        return 5;}
+    if(dame.selected){
+        dame.dead(color,nb_dead);
+        return 9;}
+    if(roi.selected){
+        roi.dead(color,nb_dead);
+        return 1000;}
+
 }

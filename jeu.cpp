@@ -101,11 +101,11 @@ void Jeu::mousePressEvent(QMouseEvent * event){
                     delete [] vert;
                     vert = NULL;
                     }
-                    depl = select->selected->deplacement(select->position(),autre->position(),select->proque,select->groque);
+                    depl = select->deplacement(autre->position());
                     afficher(depl);
-                    qDebug()<<QString::fromStdString(select->selected->nom) <<" est séléctionné\n";
-                }else if (select->selected!=NULL && depl !=NULL){
+                }else if (select->is_ptr_NotNull() && depl != NULL){
                     bool test=true;
+                    qDebug() <<test;
                     for (int k=0;k<depl->Taille();k++){
                         if (i+1 == depl->co(k).x && j+1 == depl->co(k).y){
                             test = false;
@@ -113,11 +113,12 @@ void Jeu::mousePressEvent(QMouseEvent * event){
                         }
                     }
                     delete depl;
-                    depl = nullptr;
+                    depl = NULL;
+                    qDebug() <<test;
                     if (test){break;}
-                    select->selected->move(i+1,j+1);
+                    select->move(i+1,j+1);
                     if (select->proque || select->groque){
-                        if (select->selected->roque == 1){
+                        if (select->roque(1)){
                             if ((i+1 == 1) && j+1==3){
                                 select->tour[0].move(1,4);
                             }
@@ -133,30 +134,30 @@ void Jeu::mousePressEvent(QMouseEvent * event){
                             select->proque = false;
                             select->groque = false;
                         }
-                        if (select->selected->roque==2){
+                        if (select->roque(2)){
                             select->proque = false;
                         }
-                        if (select->selected->roque==3){
+                        if (select->roque(3)){
                             select->groque = false;
                         }
                     }
                     qDebug() <<"piece bougée\n";
-                    select->selected = NULL;
+                    select->reset_ptr();
                     delete [] vert;
                     vert = NULL;
                     if (autre->is_here(i+1,j+1)){
                         if (autre->color == 1){
-                        ptblanc += autre->selected->dead(autre->color,autre->nb_dead);
+                        ptblanc += autre->dead(autre->color,autre->nb_dead);
                         autre->nb_dead++;
-                        autre->selected = NULL;
+                        autre->reset_ptr();
                         std::sprintf(score,"%d",ptblanc-ptnoir);
                         Pnoir->setText(score);
                         std::sprintf(score,"%d",ptnoir-ptblanc);
                         Pblanc->setText(score);
                         }else{
-                        ptnoir += autre->selected->dead(autre->color,autre->nb_dead);
+                        ptnoir += autre->dead(autre->color,autre->nb_dead);
                         autre->nb_dead++;
-                        autre->selected = NULL;
+                        autre->reset_ptr();
                         std::sprintf(score,"%d",ptnoir-ptblanc);
                         Pblanc->setText(score);
                         std::sprintf(score,"%d",ptblanc-ptnoir);

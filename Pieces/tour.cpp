@@ -15,6 +15,6 @@ void Tour::set(int x, int y,int r, QPixmap pix,std::string name){
 void Tour::del(){
     delete [] dep;
 };
-coor* Tour::deplacement(){
-    return NULL;
-};
+// coor* Tour::deplacement(){
+//     return NULL;
+// };

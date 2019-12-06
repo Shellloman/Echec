@@ -5,7 +5,7 @@
 class Dame: public Piece{
 public:
     coor *dep = NULL;
-    coor* deplacement();
+    // coor* deplacement();
     Dame();
     void set(int x, int y, QPixmap pix, std::string nom);
     void del(); // supp les tableaux sur le tas en trop.

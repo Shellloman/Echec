@@ -14,6 +14,6 @@ void Cavalier::set(int x, int y, QPixmap pix,std::string name){
 void Cavalier::del(){
     delete [] dep;
 }
-coor* Cavalier::deplacement(){
-    return NULL;
-}
+// coor* Cavalier::deplacement(){
+//     return NULL;
+// }

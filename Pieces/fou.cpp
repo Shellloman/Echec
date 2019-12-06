@@ -14,6 +14,6 @@ void Fou::set(int x, int y, QPixmap pix,std::string name){
 void Fou::del(){
     delete [] dep;
 };
-coor* Fou::deplacement(){
-    return NULL;
-};
+// coor* Fou::deplacement(){
+//     return NULL;
+// };
