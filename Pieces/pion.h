@@ -9,7 +9,7 @@ public:
     void del(); // supp les tableaux sur le tas en trop.
     //Dynamique* deplacement(const coor &pos_a[],const coor &pos_e[]);
     void set(int x, int y, QPixmap pix, std::string nom);
-    Dynamique* deplacement(coor* pos_a,coor* pos_e,int color);
+    Dynamique* deplacement(Dynamique* pos_a,Dynamique* pos_e,int color);
 };
 
 #endif // PION_H

@@ -118,15 +118,19 @@ void Equipe::setTime(int minutes){
     temps = new QTime(0,minutes,0);
 }
 
-coor* Equipe::position(){
-    coor *temp = new coor[16];
+Dynamique* Equipe::position(){
+    Dynamique *temp = new Dynamique;
     for(int i=0;i<8;i++){
-        temp[i]=pion[i].co;
+        if (pion[i].co.y !=9) temp->add(pion[i].co);
     }
-    temp[8] = tour[0].co;temp[9]=tour[1].co;
-    temp[10] = cavalier[0].co;temp[11]=cavalier[1].co;
-    temp[12] = fou[0].co;temp[13]=fou[1].co;
-    temp[14] = dame.co;temp[15]=roi.co;
+    if (tour[0].co.y != 9) temp->add(tour[0].co);
+    if (tour[1].co.y != 9) temp->add(tour[1].co);
+    if (cavalier[0].co.y != 9) temp->add(cavalier[0].co);
+    if (cavalier[1].co.y != 9) temp->add(cavalier[1].co);
+    if (fou[0].co.y != 9) temp->add(fou[0].co);
+    if (fou[1].co.y != 9) temp->add(fou[1].co);
+    if (dame.co.y != 9) temp->add(dame.co);
+    if (roi.co.y != 9) temp->add(roi.co);
     return temp;
 }
 void Equipe::reset_ptr(){
@@ -146,7 +150,7 @@ bool Equipe::is_ptr_NotNull(){
     return(cavalier[0].selected || pion[0].selected||cavalier[1].selected || pion[1].selected||fou[0].selected || pion[2].selected||fou[1].selected || pion[3].selected||tour[0].selected || pion[4].selected||tour[1].selected || pion[5].selected||dame.selected || pion[6].selected||roi.selected ||  pion[7].selected );
 }
 
-Dynamique* Equipe::deplacement(coor* enemie){
+Dynamique* Equipe::deplacement(Dynamique* enemie){
     for (int i =0;i<8;i++){
         if (pion[i].selected){
             return (pion[i].deplacement(position(),enemie,color));

@@ -15,7 +15,7 @@ void Pion::set(int x, int y, QPixmap pix,std::string name){
     this->nom = name;
 }
 
-Dynamique* Pion::deplacement(coor* pos_a,coor* pos_e,int color){
+Dynamique* Pion::deplacement(Dynamique* pos_a,Dynamique* pos_e,int color){
     Dynamique *dep = new Dynamique;
     if(color==1){
         bool test_a = true,test_e=true;
@@ -26,12 +26,14 @@ Dynamique* Pion::deplacement(coor* pos_a,coor* pos_e,int color){
                 longue=2;
             }
             for (int j=1;j<longue;j++){
-            for (int i=0;i<16;i++){
-                if (co.x+j == pos_a[i].x && co.y == pos_a[i].y){
+            for (int i=0;i<pos_a->Taille();i++){
+                if (co.x+j == pos_a->co(i).x && co.y == pos_a->co(i).y){
                     test_a = false;
                     break;
                 }
-                if(co.x+j == pos_e[i].x && co.y == pos_e[i].y){
+            }
+            for (int i=0;i<pos_e->Taille();i++){
+                if(co.x+j == pos_e->co(i).x && co.y == pos_e->co(i).y){
                     test_e = false;
                     break;
                 }
@@ -39,13 +41,13 @@ Dynamique* Pion::deplacement(coor* pos_a,coor* pos_e,int color){
             if (!test_a || !test_e){break;}
             dep->add({co.x+j,co.y});
             }
-            for (int i=0;i<16;i++){
-            if(co.x+1 == pos_e[i].x && co.y+1 == pos_e[i].y){
+            for (int i=0;i<pos_e->Taille();i++){
+            if(co.x+1 == pos_e->co(i).x && co.y+1 == pos_e->co(i).y){
                 dep->add({co.x+1,co.y+1});
                 break;
             }}
-            for (int i=0;i<16;i++){
-            if (co.x+1 == pos_e[i].x && co.y-1 == pos_e[i].y){
+            for (int i=0;i<pos_e->Taille();i++){
+            if (co.x+1 == pos_e->co(i).x && co.y-1 == pos_e->co(i).y){
                 dep->add({co.x+1,co.y-1});
                 break;
             }}
@@ -59,12 +61,14 @@ Dynamique* Pion::deplacement(coor* pos_a,coor* pos_e,int color){
                 longue=2;
             }
             for (int j=1;j<longue;j++){
-            for (int i=0;i<16;i++){
-                if (co.x-j == pos_a[i].x && co.y == pos_a[i].y){
+            for (int i=0;i<pos_a->Taille();i++){
+                if (co.x-j == pos_a->co(i).x && co.y == pos_a->co(i).y){
                     test_a = false;
                     break;
                 }
-                if(co.x-j == pos_e[i].x && co.y == pos_e[i].y){
+            }
+            for (int i=0;i<pos_e->Taille();i++){
+                if(co.x-j == pos_e->co(i).x && co.y == pos_e->co(i).y){
                     test_e = false;
                     break;
                 }
@@ -72,18 +76,18 @@ Dynamique* Pion::deplacement(coor* pos_a,coor* pos_e,int color){
             if (!test_a || !test_e){break;}
             dep->add({co.x-j,co.y});
             }
-            for (int i=0;i<16;i++){
-            if(co.x-1 == pos_e[i].x && co.y+1 == pos_e[i].y){
+            for (int i=0;i<pos_e->Taille();i++){
+            if(co.x-1 == pos_e->co(i).x && co.y+1 == pos_e->co(i).y){
                 dep->add({co.x-1,co.y+1});
                 break;
             }}
-            for (int i=0;i<16;i++){
-            if (co.x-1 == pos_e[i].x && co.y-1 == pos_e[i].y){
+            for (int i=0;i<pos_e->Taille();i++){
+            if (co.x-1 == pos_e->co(i).x && co.y-1 == pos_e->co(i).y){
                 dep->add({co.x-1,co.y-1});
                 break;
             }}
     }
-    delete []pos_a;
-    delete []pos_e;
+    delete pos_a;
+    delete pos_e;
     return dep;
 }

@@ -14,7 +14,7 @@ void Dame::set(int x, int y, QPixmap pix,std::string name){
 void Dame::del(){
     delete [] dep;
 }
-Dynamique* Dame::deplacement(coor* pos_a,coor* pos_e){
+Dynamique* Dame::deplacement(Dynamique* pos_a,Dynamique* pos_e){
     Dynamique *dep = new Dynamique;
     bool test_a = true,test_e=true;
     int diagNE= 0,diagSE= 0,diagSO= 0,diagNO= 0;
@@ -43,12 +43,14 @@ Dynamique* Dame::deplacement(coor* pos_a,coor* pos_e){
         k++;l--;
     }
     for (int j=1;j<diagNE;j++){
-    for (int i=0;i<16;i++){
-        if (co.x+j == pos_a[i].x && co.y+j == pos_a[i].y){
+    for (int i=0;i<pos_a->Taille();i++){
+        if (co.x+j == pos_a->co(i).x && co.y+j == pos_a->co(i).y){
             test_a = false;
             break;
         }
-        if(co.x+j == pos_e[i].x && co.y+j == pos_e[i].y){
+    }
+    for (int i=0;i<pos_e->Taille();i++){
+        if(co.x+j == pos_e->co(i).x && co.y+j == pos_e->co(i).y){
             test_e = false;
             break;
         }
@@ -59,12 +61,14 @@ Dynamique* Dame::deplacement(coor* pos_a,coor* pos_e){
     }
     test_a = true;test_e = true;
     for (int j=1;j<diagSE;j++){
-    for (int i=0;i<16;i++){
-        if (co.x-j == pos_a[i].x && co.y+j == pos_a[i].y){
+    for (int i=0;i<pos_a->Taille();i++){
+        if (co.x-j == pos_a->co(i).x && co.y+j == pos_a->co(i).y){
             test_a = false;
             break;
         }
-        if(co.x-j == pos_e[i].x && co.y+j == pos_e[i].y){
+    }
+    for (int i=0;i<pos_e->Taille();i++){
+        if(co.x-j == pos_e->co(i).x && co.y+j == pos_e->co(i).y){
             test_e = false;
             break;
         }
@@ -75,12 +79,14 @@ Dynamique* Dame::deplacement(coor* pos_a,coor* pos_e){
     }
     test_a = true;test_e = true;
     for (int j=1;j<diagSO;j++){
-    for (int i=0;i<16;i++){
-        if (co.x-j == pos_a[i].x && co.y-j == pos_a[i].y){
+    for (int i=0;i<pos_a->Taille();i++){
+        if (co.x-j == pos_a->co(i).x && co.y-j == pos_a->co(i).y){
             test_a = false;
             break;
         }
-        if(co.x-j == pos_e[i].x && co.y-j == pos_e[i].y){
+    }
+    for (int i=0;i<pos_e->Taille();i++){
+        if(co.x-j == pos_e->co(i).x && co.y-j == pos_e->co(i).y){
             test_e = false;
             break;
         }
@@ -91,12 +97,14 @@ Dynamique* Dame::deplacement(coor* pos_a,coor* pos_e){
     }
     test_a = true;test_e = true;
     for (int j=1;j<diagNO;j++){
-    for (int i=0;i<16;i++){
-        if (co.x+j == pos_a[i].x && co.y-j == pos_a[i].y){
+    for (int i=0;i<pos_a->Taille();i++){
+        if (co.x+j == pos_a->co(i).x && co.y-j == pos_a->co(i).y){
             test_a = false;
             break;
         }
-        if(co.x+j == pos_e[i].x && co.y-j == pos_e[i].y){
+    }
+    for (int i=0;i<pos_e->Taille();i++){
+        if(co.x+j == pos_e->co(i).x && co.y-j == pos_e->co(i).y){
             test_e = false;
             break;
         }
@@ -113,12 +121,14 @@ Dynamique* Dame::deplacement(coor* pos_a,coor* pos_e){
     large = 9 - co.y;
     largem = co.y;
     for (int j=1;j<longue;j++){
-    for (int i=0;i<16;i++){
-        if (co.x+j == pos_a[i].x && co.y == pos_a[i].y){
+    for (int i=0;i<pos_a->Taille();i++){
+        if (co.x+j == pos_a->co(i).x && co.y == pos_a->co(i).y){
             test_a = false;
             break;
         }
-        if(co.x+j == pos_e[i].x && co.y == pos_e[i].y){
+    }
+    for (int i=0;i<pos_e->Taille();i++){
+        if(co.x+j == pos_e->co(i).x && co.y == pos_e->co(i).y){
             test_e = false;
             break;
         }
@@ -129,12 +139,14 @@ Dynamique* Dame::deplacement(coor* pos_a,coor* pos_e){
     }
     test_a = true; test_e = true;
     for (int j=1;j<longuem;j++){
-    for (int i=0;i<16;i++){
-        if (co.x-j == pos_a[i].x && co.y == pos_a[i].y){
+    for (int i=0;i<pos_a->Taille();i++){
+        if (co.x-j == pos_a->co(i).x && co.y == pos_a->co(i).y){
             test_a = false;
             break;
         }
-        if(co.x-j == pos_e[i].x && co.y == pos_e[i].y){
+    }
+    for (int i=0;i<pos_e->Taille();i++){
+        if(co.x-j == pos_e->co(i).x && co.y == pos_e->co(i).y){
             test_e = false;
             break;
         }
@@ -145,12 +157,14 @@ Dynamique* Dame::deplacement(coor* pos_a,coor* pos_e){
     }
     test_a = true; test_e = true;
     for (int j=1;j<large;j++){
-    for (int i=0;i<16;i++){
-        if (co.x == pos_a[i].x && co.y+j == pos_a[i].y){
+    for (int i=0;i<pos_a->Taille();i++){
+        if (co.x == pos_a->co(i).x && co.y+j == pos_a->co(i).y){
             test_a = false;
             break;
         }
-        if(co.x == pos_e[i].x && co.y+j == pos_e[i].y){
+    }
+    for (int i=0;i<pos_e->Taille();i++){
+        if(co.x == pos_e->co(i).x && co.y+j == pos_e->co(i).y){
             test_e = false;
             break;
         }
@@ -161,12 +175,14 @@ Dynamique* Dame::deplacement(coor* pos_a,coor* pos_e){
     }
     test_a = true; test_e = true;
     for (int j=1;j<largem;j++){
-    for (int i=0;i<16;i++){
-        if (co.x == pos_a[i].x && co.y-j == pos_a[i].y){
+    for (int i=0;i<pos_a->Taille();i++){
+        if (co.x == pos_a->co(i).x && co.y-j == pos_a->co(i).y){
             test_a = false;
             break;
         }
-        if(co.x == pos_e[i].x && co.y-j == pos_e[i].y){
+    }
+    for (int i=0;i<pos_e->Taille();i++){
+        if(co.x == pos_e->co(i).x && co.y-j == pos_e->co(i).y){
             test_e = false;
             break;
         }
@@ -175,7 +191,7 @@ Dynamique* Dame::deplacement(coor* pos_a,coor* pos_e){
     dep->add({co.x,co.y-j});
     if (!test_e){break;}
     }
-    delete []pos_a;
-    delete []pos_e;
+    delete pos_a;
+    delete pos_e;
     return dep;
 }

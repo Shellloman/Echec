@@ -2,6 +2,7 @@
 #define DYNAMIQUE_H
 struct coor{
     int x,y;
+    //char n;
 };
 
 class Dynamique

@@ -25,11 +25,11 @@ public:
     QTime *temps;
     Equipe(int couleur);
 
-    coor* position();
+    Dynamique* position();
     void reset_ptr();
     bool is_here(int x,int y);
     void setTime(int minutes);
-    Dynamique* deplacement(coor* enemie);
+    Dynamique* deplacement(Dynamique* enemie);
     bool is_ptr_NotNull();
     void move(int x,int y);
     bool roque(int r);
